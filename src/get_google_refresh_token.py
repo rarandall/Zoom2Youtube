@@ -8,7 +8,6 @@ TOKEN_URL = 'https://accounts.google.com/o/oauth2/token'
 REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob'
 GRANT_TYPE = 'authorization_code'
 
-
 def get_token(url, code, client_id, client_secret, redirect_uri, grant_type):
     assert code, "Not found GOOGLE_CODE"
     assert client_id, "Not found GOOGLE_CLIENT_ID"

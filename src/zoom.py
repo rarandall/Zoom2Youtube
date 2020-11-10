@@ -50,9 +50,9 @@ class ZoomRecording(object):
             self,
             client,
             email,
-            duration_min=10,
-            filter_meeting_by_name=False,
-            only_meeting_names=None,
+            duration_min=5,
+            filter_meeting_by_name=True,
+            only_meeting_names=['Tea Time Tableau','R8アカデミー'],
             from_day_delta=7,
     ):
 
@@ -84,10 +84,10 @@ class ZoomRecording(object):
     def filter_meetings(self, meetings):
         for m in meetings:
             if m.get("duration", 0) < self.duration_min:
-                continue
+               continue
 
             if self.filter_meeting_by_name and m.get("topic").strip() not in self.only_meeting_names:
-                continue
+               continue
 
             yield m
 
@@ -135,7 +135,7 @@ class ZoomRecording(object):
     def _get_output_filename(self, meeting, prefix=''):
         start_time = datetime.strptime(
             meeting.get('start_time'), '%Y-%m-%dT%H:%M:%SZ'
-        ).strftime('%d-%m-%Y')
+        ).strftime('%m-%d-%Y')
         topic = meeting.get('topic').replace('/', '.')
         return '{}{} {}.mp4'.format(topic, prefix, start_time)
 
